@@ -15,16 +15,15 @@ entradaUsuario = "p^q"
     
 def imprimeTabela(t, entradaUsuario):
 
-    tabela = ( " +-----+-----+------+------+ \n" \
-               f" |  {entradaUsuario[0]}  |  {entradaUsuario[2]}  |  ~{entradaUsuario[0]}  |  ~{entradaUsuario[2]}  |\n" \
-               " +-----+-----+------+------+ \n " \
-               f"|  {t[0][0]}  |  {t[0][1]}  |   {t[0][2]}  |   {t[0][3]}  | \n" \
-               f" |  {t[1][0]}  |  {t[1][1]}  |   {t[1][2]}  |   {t[1][3]}  | \n" \
-               f" |  {t[2][0]}  |  {t[2][1]}  |   {t[2][2]}  |   {t[2][3]}  | \n" \
-               f" |  {t[3][0]}  |  {t[3][1]}  |   {t[3][2]}  |   {t[3][3]}  | \n" \
-               " +-----+-----+------+------+")
+    tabela = [[f"|   {entradaUsuario[0]}  ", f"|   {entradaUsuario[2]}  ", f"|  ~{entradaUsuario[0]}  ", f"|  ~{entradaUsuario[2]}   |"], \
+              [f"|   {t[0][0]}  ", f"|   {t[0][1]}  ", f"|   {t[0][2]}  ", f"|   {t[0][3]}   |"], \
+              [f"|   {t[1][0]}  ", f"|   {t[1][1]}  ", f"|   {t[1][2]}  ", f"|   {t[1][3]}   |"], \
+              [f"|   {t[2][0]}  ", f"|   {t[2][1]}  ", f"|   {t[2][2]}  ", f"|   {t[2][3]}   |"], \
+              [f"|   {t[3][0]}  ", f"|   {t[3][1]}  ", f"|   {t[3][2]}  ", f"|   {t[3][3]}   |"]]
 
-    print(tabela)
+    for i in range(0,5):
+        print( tabela[i][0],tabela[i][1], tabela[i][2], tabela[i][3] )
+
 
 imprimeTabela(t, entradaUsuario)
 
