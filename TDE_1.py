@@ -1,5 +1,8 @@
-print("\nBoas vindas!\n")
-entrada = input("Digite sua expressão lógica: ")
+print("\nBoas vindas!\n\nVocê pode usar os seguintes conectivos: ^, v, -> e <->, \
+       \ne pode usar o símbolo de negação. Não use parênteses! \
+       \nUse espaço entre as letras e o conectivo. \
+       \nEste programa aceita apenas um conectivo. ")
+entrada = input("\nDigite sua expressão lógica: ")
 print("\n")
 entradaRecortada = entrada.split(" ")
 tabelaVerdade = [["V", "V", "F", "F"],
@@ -75,7 +78,7 @@ def funcaoE(tabelaVerdade, entrada, entradaRecortada):
 
     return valoresLogicosFormatada
 
-def funcaoOu(tabelaVerdade, entrada):
+def funcaoOu(tabelaVerdade, entrada, entradaRecortada):
     t = tabelaVerdade
     valoresLogicos = [None]*4
     colunaP = escolheColuna(entradaRecortada)[0]
@@ -95,7 +98,7 @@ def funcaoOu(tabelaVerdade, entrada):
 
     return valoresLogicosFormatada
 
-def funcaoImplicacao(tabelaVerdade, entrada):
+def funcaoImplicacao(tabelaVerdade, entrada, entradaRecortada):
     t = tabelaVerdade
     valoresLogicos = [None]*4
     colunaP = escolheColuna(entradaRecortada)[0]
@@ -115,7 +118,7 @@ def funcaoImplicacao(tabelaVerdade, entrada):
 
     return valoresLogicosFormatada
 
-def funcaoBiImplicacao(tabelaVerdade, entrada):
+def funcaoBiImplicacao(tabelaVerdade, entrada, entradaRecortada):
     t = tabelaVerdade
     valoresLogicos = [None]*4
     colunaP = escolheColuna(entradaRecortada)[0]
@@ -128,20 +131,32 @@ def funcaoBiImplicacao(tabelaVerdade, entrada):
             valoresLogicos[i] = "V"  
 
     valoresLogicosFormatada = [f" {entrada}", \
-                               f"   {valoresLogicos[0]}", \
-                               f"   {valoresLogicos[1]}", \
-                               f"   {valoresLogicos[2]}", \
-                               f"   {valoresLogicos[3]}"]
+                               f"    {valoresLogicos[0]}", \
+                               f"    {valoresLogicos[1]}", \
+                               f"    {valoresLogicos[2]}", \
+                               f"    {valoresLogicos[3]}"]
 
     return valoresLogicosFormatada
 
-tabela = formataTabelaVerdade(tabelaVerdade, entradaRecortada)
-teste = funcaoE(tabelaVerdade, entrada, entradaRecortada)
+print("Aqui está o resultado!\n")
+tabelaVerdadeFormatada = formataTabelaVerdade(tabelaVerdade, entradaRecortada)
+
+if entradaRecortada[1] == "^":
+    tabelaVerdadeDoUsuario = funcaoE(tabelaVerdade, entrada, entradaRecortada)
+
+if entradaRecortada[1] == "V" or entradaRecortada[1] == "v":
+    tabelaVerdadeDoUsuario = funcaoOu(tabelaVerdade, entrada, entradaRecortada)
+
+if entradaRecortada[1] == "->":
+    tabelaVerdadeDoUsuario = funcaoImplicacao(tabelaVerdade, entrada, entradaRecortada)
+
+if entradaRecortada[1] == "<->":
+    tabelaVerdadeDoUsuario = funcaoBiImplicacao(tabelaVerdade, entrada, entradaRecortada)
 
 for i in range(0,5):
-    print( tabela[i][0],tabela[i][1], tabela[i][2], tabela[i][3], teste[i]) 
+    print( tabelaVerdadeFormatada[i][0],tabelaVerdadeFormatada[i][1], tabelaVerdadeFormatada[i][2], tabelaVerdadeFormatada[i][3], tabelaVerdadeDoUsuario[i]) 
 
-#print(tabela)
+
 
 
 
