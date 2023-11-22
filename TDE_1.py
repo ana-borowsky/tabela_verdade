@@ -1,3 +1,11 @@
+# Aluna Ana Paula Borowsky de Borba
+# Exemplos de entradas aceitas: "p ^ q", "a V ~b", "p -> ~q", "~a <-> b"
+# O programa funciona de uma maneira diferente da pedida pelo professor no trabalho, o que pode diminuir a nota, porém deixaria o trabalho 
+# mais interessante de ser feito e melhoraria a compreensão da matéria.
+# O programa lê a entrada do usuário e verifica qual foi o conectivo utilizado.
+# Então o programa irá calcular os valores lógicos conforme o conectivo e se a letra está sendo negada ou não.
+# O programa então gera a tabela verdade formatada de acordo com a entrada do usuário.
+
 print("\nBoas vindas!\n\nVocê pode usar os seguintes conectivos: ^, v, -> e <->, \
        \ne pode usar o símbolo de negação. Não use parênteses! \
        \nUse espaço entre as letras e o conectivo. \
@@ -10,6 +18,7 @@ tabelaVerdade = [["V", "V", "F", "F"],
                  ["F", "V", "V", "F"],
                  ["F", "F", "V", "V"]]
 
+# Verifica quais são as letras que o usuário digitou para poder usar na impressão das tabelas formatadas.
 def pegaLetras(entradaRecortada):
     primeiraLetra = None
     segundaLetra = None
@@ -28,22 +37,25 @@ def pegaLetras(entradaRecortada):
 
     return(primeiraLetra, segundaLetra)
 
+# Escolhe se os valores lógicos a serem pegos serão da coluna 'p' ou '~p' por exemplo.
 def escolheColuna(entradaRecortada):
-    colunaP = 0
-    colunaQ = 0
+    colunaPrimeiraLetra = 0
+    colunaSegundaLetra = 0
 
     if '~' in entradaRecortada[0]: 
-        colunaP = 2
+        colunaPrimeiraLetra = 2
     else:
-        colunaP = 0
+        colunaPrimeiraLetra = 0
 
     if '~' in entradaRecortada[2]: 
-        colunaQ = 3
+        colunaSegundaLetra = 3
     else:
-        colunaQ = 1 
+        colunaSegundaLetra = 1 
     
-    return(colunaP, colunaQ)
-    
+    return(colunaPrimeiraLetra, colunaSegundaLetra)
+
+# Formata a matriz tabela verdade para poder imprimir de forma mais bonitinha na tela. 
+# Também faz o cabeçalho de acordo com a entrada do usuário.
 def formataTabelaVerdade(tabelaVerdade, entradaRecortada):    
     t = tabelaVerdade   
     primeiraLetra = pegaLetras(entradaRecortada)[0]
@@ -57,15 +69,16 @@ def formataTabelaVerdade(tabelaVerdade, entradaRecortada):
 
     return tabelaVerdadeFormatada
 
+# É a função do E
 def funcaoE(tabelaVerdade, entrada, entradaRecortada):
     valoresLogicos = [None]*4
     t = tabelaVerdade
 
-    colunaP = escolheColuna(entradaRecortada)[0]
-    colunaQ = escolheColuna(entradaRecortada)[1]
+    colunaPrimeiraLetra = escolheColuna(entradaRecortada)[0]
+    colunaSegundaLetra = escolheColuna(entradaRecortada)[1]
 
     for i in range(0,4):
-        if t[i][colunaP] == "V" and t[i][colunaQ] == "V":
+        if t[i][colunaPrimeiraLetra] == "V" and t[i][colunaSegundaLetra] == "V":
             valoresLogicos[i] = "V"
         else:
             valoresLogicos[i] = "F"  
@@ -78,14 +91,15 @@ def funcaoE(tabelaVerdade, entrada, entradaRecortada):
 
     return valoresLogicosFormatada
 
+# É a função do OU
 def funcaoOu(tabelaVerdade, entrada, entradaRecortada):
     t = tabelaVerdade
     valoresLogicos = [None]*4
-    colunaP = escolheColuna(entradaRecortada)[0]
-    colunaQ = escolheColuna(entradaRecortada)[1]
+    colunaPrimeiraLetra = escolheColuna(entradaRecortada)[0]
+    colunaSegundaLetra = escolheColuna(entradaRecortada)[1]
 
     for i in range(0,4):
-        if t[i][colunaP] == "V" or t[i][colunaQ] == "V":
+        if t[i][colunaPrimeiraLetra] == "V" or t[i][colunaSegundaLetra] == "V":
             valoresLogicos[i] = "V"
         else:
             valoresLogicos[i] = "F"  
@@ -98,14 +112,15 @@ def funcaoOu(tabelaVerdade, entrada, entradaRecortada):
 
     return valoresLogicosFormatada
 
+# É a função da IMPLICAÇÃO
 def funcaoImplicacao(tabelaVerdade, entrada, entradaRecortada):
     t = tabelaVerdade
     valoresLogicos = [None]*4
-    colunaP = escolheColuna(entradaRecortada)[0]
-    colunaQ = escolheColuna(entradaRecortada)[1]
+    colunaPrimeiraLetra = escolheColuna(entradaRecortada)[0]
+    colunaSegundaLetra = escolheColuna(entradaRecortada)[1]
 
     for i in range(0,4):
-        if t[i][colunaP] == "V" and t[i][colunaQ] == "F":
+        if t[i][colunaPrimeiraLetra] == "V" and t[i][colunaSegundaLetra] == "F":
             valoresLogicos[i] = "F"
         else:
             valoresLogicos[i] = "V"  
@@ -118,14 +133,15 @@ def funcaoImplicacao(tabelaVerdade, entrada, entradaRecortada):
 
     return valoresLogicosFormatada
 
+# É a função da BI-IMPLICAÇÃO
 def funcaoBiImplicacao(tabelaVerdade, entrada, entradaRecortada):
     t = tabelaVerdade
     valoresLogicos = [None]*4
-    colunaP = escolheColuna(entradaRecortada)[0]
-    colunaQ = escolheColuna(entradaRecortada)[1]
+    colunaPrimeiraLetra = escolheColuna(entradaRecortada)[0]
+    colunaSegundaLetra = escolheColuna(entradaRecortada)[1]
 
     for i in range(0,4):
-        if t[i][colunaP] != t[i][colunaQ]:
+        if t[i][colunaPrimeiraLetra] != t[i][colunaSegundaLetra]:
             valoresLogicos[i] = "F"
         else:
             valoresLogicos[i] = "V"  
@@ -139,8 +155,10 @@ def funcaoBiImplicacao(tabelaVerdade, entrada, entradaRecortada):
     return valoresLogicosFormatada
 
 print("Aqui está o resultado!\n")
+
 tabelaVerdadeFormatada = formataTabelaVerdade(tabelaVerdade, entradaRecortada)
 
+# Detecta o conectivo e chama a função de acordo.
 if entradaRecortada[1] == "^":
     tabelaVerdadeDoUsuario = funcaoE(tabelaVerdade, entrada, entradaRecortada)
 
@@ -153,26 +171,6 @@ if entradaRecortada[1] == "->":
 if entradaRecortada[1] == "<->":
     tabelaVerdadeDoUsuario = funcaoBiImplicacao(tabelaVerdade, entrada, entradaRecortada)
 
+# Imprime a tabela final formatada.
 for i in range(0,5):
     print( tabelaVerdadeFormatada[i][0],tabelaVerdadeFormatada[i][1], tabelaVerdadeFormatada[i][2], tabelaVerdadeFormatada[i][3], tabelaVerdadeDoUsuario[i]) 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
